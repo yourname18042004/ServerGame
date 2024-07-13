@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://bb7cmkl8lhhmj"]
+
+[ext_resource type="MeshLibrary" uid="uid://n51ighv31oq3" path="res://Assets/Map/Map.tres" id="1_ofh5n"]
+[ext_resource type="PackedScene" uid="uid://6vtqnpa4behk" path="res://Scenes/character.tscn" id="2_52ypv"]
+[ext_resource type="PackedScene" uid="uid://cqpokw1o1e0cj" path="res://Scenes/player.tscn" id="3_x4y1t"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ofphk"]
+
+[sub_resource type="Sky" id="Sky_6mq1n"]
+sky_material = SubResource("ProceduralSkyMaterial_ofphk")
+
+[sub_resource type="Environment" id="Environment_mnd65"]
+background_mode = 2
+sky = SubResource("Sky_6mq1n")
+
+[node name="Room" type="Node3D"]
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_ofh5n")
+data = {
+"cells": PackedInt32Array(-1, 0, 0, -65536, 65535, 0, -65536, 0, 0, -65535, 0, 0, -65535, 65535, 0, -1, 65535, 0, -1, 65534, 0, -65536, 65534, 0, -65535, 65533, 0, -65536, 65533, 0, -1, 65533, 0, -65535, 65534, 0, -2, 65534, 5, -2, 65535, 5, -2, 0, 5, -2, 65532, 6, -2, 65533, 5, -1, 65532, 1441797, -65536, 65532, 1441797, -65535, 65532, 1441797, -65534, 65533, 655365, -65534, 65534, 655365, -65534, 65535, 655365, -65534, 0, 655365, -65535, 1, 1048581, -65536, 1, 1048581, -1, 1, 1048581, -2, 1, 1048582, -65534, 65532, 1441798, -65534, 1, 655366)
+}
+metadata/_editor_floor_ = Vector3(0, -1, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mnd65")
+
+[node name="Character" parent="." instance=ExtResource("2_52ypv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="RigidBody3D" parent="." instance=ExtResource("3_x4y1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.475547, 0.775049, -0.416118, 0, 0.473028, 0.881048, 0.87969, -0.41898, 0.224947, -8.07838, 5.23309, 0)
+shadow_enabled = true
